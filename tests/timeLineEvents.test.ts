@@ -1,5 +1,6 @@
 import * as TimeLineEvents from "../src/timelineEvents";
 import vehicles from "../src/models/vehicles";
+import {fromDateYearsCalculator} from "../src/timeStamps";
 
 const [FordFiesta, MercSCoupe, MercGWagen, UnknownVehicle] = vehicles;
 
