@@ -50,3 +50,11 @@ it('Find honest mileage and date for UnknownVehicle, should be 0 since it has no
   expect(TimeLineEvents.findLatestHonestRegisteredData(UnknownVehicle))
       .toBe(0)
 })
+
+
+
+// Calculating the average annual mileage using the events in the timeline by MOT
+it('Calculate the average annual mileage using the events in the timeline by the MOT history from Ford Fiesta', () => {
+  expect(TimeLineEvents.calculateAnnualMileageEstimates(FordFiesta))
+      .toEqual(TimeLineEvents.findAnnualMileageEstimate(FordFiesta.mots[0].mileage, FordFiesta.first_registration_date));
+})

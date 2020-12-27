@@ -17,3 +17,14 @@ export const findLatestHonestRegisteredData = (vehicle: Vehicle):DetailsWithMile
     return combinedMotWithSales.length &&
         combinedMotWithSales.map(combineMotWithSalesIntoMileageAndDate).reduce(sortListOfDetailsByMileageVsDateReducer);
 }
+
+
+export const calculateAnnualMileageEstimates = (vehicle:Vehicle):number => {
+    const latestHonestData:DetailsWithMileageAndDate = findLatestHonestRegisteredData(vehicle);
+    if(latestHonestData) {
+        return findAnnualMileageEstimate(latestHonestData.mileage, vehicle.first_registration_date);
+    }
+    else {
+        return 7900;
+    }
+}
