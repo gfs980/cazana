@@ -1,0 +1,22 @@
+{
+  "name": "cazana",
+  "version": "1.0.0",
+  "description": "This documentation how to run the app",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gfs980/cazana.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gfs980/cazana/issues"
+  },
+  "homepage": "https://github.com/gfs980/cazana#readme"
+}
