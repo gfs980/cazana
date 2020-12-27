@@ -18,3 +18,14 @@ it('Find annual mileage for MercGWagen', () => {
   expect(TimeLineEvents.findAnnualMileageEstimate(MercGWagen.sale_adverts[0].mileage, MercGWagen.first_registration_date))
       .toBe(8401)
 })
+
+
+
+// Finding latest honest mileage and date that was registered
+it('Find honest mileage and date for Ford Fiesta', () => {
+  expect(TimeLineEvents.findLatestHonestRegisteredData(FordFiesta))
+      .toStrictEqual({
+        date: new Date('4 August 2020'),
+        mileage: 115893
+      })
+})
