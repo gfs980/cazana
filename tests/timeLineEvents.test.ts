@@ -29,3 +29,24 @@ it('Find honest mileage and date for Ford Fiesta', () => {
         mileage: 115893
       })
 })
+
+it('Find honest mileage and date for Mercedes S coupe', () => {
+  expect(TimeLineEvents.findLatestHonestRegisteredData(MercSCoupe))
+      .toStrictEqual({
+        date: new Date('17 December 2020'),
+        mileage: 16484
+      })
+})
+
+it('Find honest mileage and date for Mercedes G-Wagen', () => {
+  expect(TimeLineEvents.findLatestHonestRegisteredData(MercGWagen))
+      .toStrictEqual({
+        date: new Date('1 October 2020'),
+        mileage: 16802
+      })
+})
+
+it('Find honest mileage and date for UnknownVehicle, should be 0 since it has no MOT and Sales', () => {
+  expect(TimeLineEvents.findLatestHonestRegisteredData(UnknownVehicle))
+      .toBe(0)
+})
