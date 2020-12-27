@@ -110,3 +110,15 @@ it('testing current mileage should be higher than last MOT test or sale advert f
 it('Finding Honest mileage by projecting from the most recent, event using the average annual mileage for Ford Fiesta', () => {
   expect(TimeLineEvents.estimateVehicleCurrentMileage(FordFiesta)).toBeGreaterThan(7900)
 })
+
+it('Finding Honest mileage by projecting from the most recent, event using the average annual mileage for Mercedes S coupe', () => {
+  expect(TimeLineEvents.estimateVehicleCurrentMileage(MercSCoupe)).toBeGreaterThan(7900)
+})
+
+it('Finding Honest mileage by projecting from the most recent, event using the average annual mileage for Mercedes G-Wagen', () => {
+  expect(TimeLineEvents.estimateVehicleCurrentMileage(MercGWagen)).toBeGreaterThan(7900)
+})
+
+it('Finding Honest mileage by projecting from the most recent, event using the average annual mileage for UnknownVehicle Test', () => {
+  expect(TimeLineEvents.estimateVehicleCurrentMileage(UnknownVehicle)).toBeGreaterThan(7900 * 5) //since the unknown car is 5 years old
+})
