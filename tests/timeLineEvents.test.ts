@@ -84,3 +84,19 @@ it('testing current mileage should be higher than last MOT test or sale advert f
   expect(TimeLineEvents.currentEstimateMileage({annualEstimate, latestMileageRegistered, dateAtLatestMileageRegistered}))
       .toBeGreaterThanOrEqual(FordFiesta.mots[0].mileage)
 })
+
+it('testing current mileage should be higher than last MOT test or sale advert for Mercedes S coupe', () => {
+  const annualEstimate:number = TimeLineEvents.calculateAnnualMileageEstimates(MercSCoupe);
+  const latestMileageRegistered:number = MercSCoupe.mots[0].mileage;
+  const dateAtLatestMileageRegistered:Date = MercSCoupe.mots[0].date;
+  expect(TimeLineEvents.currentEstimateMileage({annualEstimate, latestMileageRegistered, dateAtLatestMileageRegistered}))
+      .toBeGreaterThanOrEqual(MercSCoupe.mots[0].mileage)
+})
+
+it('testing current mileage should be higher than last MOT test or sale advert for Mercedes G-Wagen', () => {
+  const annualEstimate:number = TimeLineEvents.calculateAnnualMileageEstimates(MercGWagen);
+  const latestMileageRegistered:number = MercGWagen.sale_adverts[0].mileage;
+  const dateAtLatestMileageRegistered:Date = MercGWagen.sale_adverts[0].date;
+  expect(TimeLineEvents.currentEstimateMileage({annualEstimate, latestMileageRegistered, dateAtLatestMileageRegistered}))
+      .toBeGreaterThanOrEqual(MercGWagen.sale_adverts[0].mileage)
+})
