@@ -1,4 +1,5 @@
-import {fromDateYearsCalculator} from "./timeStamps";
+import {fromDateYearsCalculator, dayPastAfterKnownDate} from "./timeStamps";
+import currentEstimateMileageType from "./types/timeLineEvents";
 import Vehicle, {DetailsWithMileageAndDate} from "./types/Vehicle";
 
 export const findAnnualMileageEstimate = (mileage:number, approxCarManufactureDate:Date):number => {
@@ -27,4 +28,12 @@ export const calculateAnnualMileageEstimates = (vehicle:Vehicle):number => {
     else {
         return 7900;
     }
+}
+
+
+export const currentEstimateMileage = (details:currentEstimateMileageType):number => {
+    const {annualEstimate, latestMileageRegistered, dateAtLatestMileageRegistered} = details;
+    const mileagePerDay:number = annualEstimate / 365;
+    const daysPast:number = dayPastAfterKnownDate(dateAtLatestMileageRegistered);
+    return latestMileageRegistered + daysPast * mileagePerDay;
 }

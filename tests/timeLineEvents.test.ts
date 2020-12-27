@@ -58,3 +58,29 @@ it('Calculate the average annual mileage using the events in the timeline by the
   expect(TimeLineEvents.calculateAnnualMileageEstimates(FordFiesta))
       .toEqual(TimeLineEvents.findAnnualMileageEstimate(FordFiesta.mots[0].mileage, FordFiesta.first_registration_date));
 })
+
+it('Calculate the average annual mileage using the events in the timeline by the only 1 MOT test from Mercedes S coupe', () => {
+  expect(TimeLineEvents.calculateAnnualMileageEstimates(MercSCoupe))
+      .toEqual(TimeLineEvents.findAnnualMileageEstimate(MercSCoupe.sale_adverts[0].mileage, MercSCoupe.first_registration_date));
+})
+
+it('Calculate the average annual mileage using the events in the timeline without MOT test as 7900 from Mercedes G-Wagen', () => {
+  expect(TimeLineEvents.calculateAnnualMileageEstimates(MercGWagen)).toEqual(MercGWagen.sale_adverts[0].mileage / fromDateYearsCalculator(MercGWagen.first_registration_date));
+})
+
+// Calculating the average annual mileage using the events in the timeline by Sale History
+it('Calculate the average annual mileage using the events in the timeline by the fake data', () => {
+  expect(TimeLineEvents.calculateAnnualMileageEstimates(UnknownVehicle))
+      .toEqual(7900);
+})
+
+
+
+// Estimating Current mileage by MOT or Sale history
+it('testing current mileage should be higher than last MOT test or sale advert for Ford Fiesta', () => {
+  const annualEstimate:number = TimeLineEvents.calculateAnnualMileageEstimates(FordFiesta);
+  const latestMileageRegistered:number = FordFiesta.mots[0].mileage;
+  const dateAtLatestMileageRegistered:Date = FordFiesta.mots[0].date;
+  expect(TimeLineEvents.currentEstimateMileage({annualEstimate, latestMileageRegistered, dateAtLatestMileageRegistered}))
+      .toBeGreaterThanOrEqual(FordFiesta.mots[0].mileage)
+})
