@@ -100,3 +100,13 @@ it('testing current mileage should be higher than last MOT test or sale advert f
   expect(TimeLineEvents.currentEstimateMileage({annualEstimate, latestMileageRegistered, dateAtLatestMileageRegistered}))
       .toBeGreaterThanOrEqual(MercGWagen.sale_adverts[0].mileage)
 })
+
+
+
+// Finding Honest mileage by projecting from the most recent, event using the average annual mileage
+// By the meaning of "Honest" I mean that some times the Ads get posted after or before the MOT test was done and even in case of when the
+// ad is most recent compared to MOT but it has lower mileage compared to MOT test as example with Ford Fiesta. Therefore in this
+// case I will take the details from MOT or the oldest mileage that was registered at the date.
+it('Finding Honest mileage by projecting from the most recent, event using the average annual mileage for Ford Fiesta', () => {
+  expect(TimeLineEvents.estimateVehicleCurrentMileage(FordFiesta)).toBeGreaterThan(7900)
+})

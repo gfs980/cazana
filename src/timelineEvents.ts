@@ -7,9 +7,11 @@ export const findAnnualMileageEstimate = (mileage:number, approxCarManufactureDa
     return Math.round((mileage / approxCarAge + Number.EPSILON) * 100) / 100
 }
 
+
 export const sortListOfDetailsByMileageVsDateReducer = (accumulator:DetailsWithMileageAndDate, currentValue:DetailsWithMileageAndDate):DetailsWithMileageAndDate => {
     return accumulator.mileage > currentValue.mileage ? accumulator : currentValue
 }
+
 
 export const combineMotWithSalesIntoMileageAndDate = (data):DetailsWithMileageAndDate => ({mileage: data.mileage, date: data.date});
 
@@ -36,4 +38,18 @@ export const currentEstimateMileage = (details:currentEstimateMileageType):numbe
     const mileagePerDay:number = annualEstimate / 365;
     const daysPast:number = dayPastAfterKnownDate(dateAtLatestMileageRegistered);
     return latestMileageRegistered + daysPast * mileagePerDay;
+}
+
+
+export const estimateVehicleCurrentMileage = (vehicle:Vehicle):number => {
+    const annualEstimate:number = calculateAnnualMileageEstimates(vehicle);
+    const latestDataKnownAboutMileage:DetailsWithMileageAndDate = findLatestHonestRegisteredData(vehicle);
+    if(latestDataKnownAboutMileage) {
+        const latestMileageRegistered:number = latestDataKnownAboutMileage.mileage;
+        const dateAtLatestMileageRegistered:Date = latestDataKnownAboutMileage.date;
+        return currentEstimateMileage({annualEstimate, latestMileageRegistered, dateAtLatestMileageRegistered})
+    }
+    else {
+        return annualEstimate / 365 * dayPastAfterKnownDate(vehicle.first_registration_date);
+    }
 }
